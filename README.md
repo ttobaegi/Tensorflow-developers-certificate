@@ -1,23 +1,110 @@
 # Tensorflow-developers-certificate
 
-# Convolutional Neural Networks in TensorFlow (2)
+
+## Convolutional Neural Networks in TensorFlow 
 
 >#### Table of Contents
-- [3 - Transfer Learning](#3)
-  - [3-1. Download pre-trained weights](#3-1)
-  - [3-2. Load pre-trained weights](#3-2)
-  - [3-3. Output layer of pre-trained model ](#3-3)
-  - [3-4. Build the new model using pre-trained model](#3-4)
-  - [3-5. Load Image Dataset](#3-5)
-  - [3-6. Data Augmentation](#3-6)
-  - [3-7. Train the model](#3-7)
-- [4 - Multiclass Classifications](#4)
-  - [4-1. Download and unzip Image Dataset](#4-1)
-  - [4-2. Image Data Augmentation](#4-2)
-  - [4-3. Build a classifier](#4-3)
+> - [1 - Exploring a Larger Dataset](#1)
+> - [2 - Augmentation: A technique to avoid overfitting](#2)
+>   - [2-1. ImageDataGenerator](#2-1)
+> - [3 - Transfer Learning](#3)
+>   - [3-1. Download pre-trained weights](#3-1)
+>   - [3-2. Load pre-trained weights](#3-2)
+>   - [3-3. Output layer of pre-trained model ](#3-3)
+>   - [3-4. Build the new model using pre-trained model](#3-4)
+>   - [3-5. Load Image Dataset](#3-5)
+>   - [3-6. Data Augmentation](#3-6)
+>   - [3-7. Train the model](#3-7)
+> - [4 - Multi-class Classifications](#4)
+>   - [4-1. Download and unzip Image Dataset](#4-1)
+>   - [4-2. Image Data Augmentation](#4-2)
+>   - [4-3. Build a classifier](#4-3)
 
 </br>
 </br>
+
+<a name='1'></a>
+## 1 - Exploring a Larger Dataset
+
+
+</br>
+</br>
+
+<a name='2'></a>
+## 2 - Augmentation 
+- A technique to avoid overfitting
+
+ 작은 이미지 데이터 셋으로 NN모델을 훈련하면 과적합 overfitting 문제로 새로운 이미지 데이터에 대해 좋은 성능을 내지 못할 수 있다. 간단한 **이미지 전처리 기법 Image Augmentation으로 과적합 문제를 해결**할 수 있다.
+
+ **"Image Augmentation"은 이미지를 훈련할 때마다 이미지에 임의로 변형을 가함으로써 모델이 더 많은 이미지를 학습하도록 만드는 것**이다. 모델이 작은 이미지 데이터 셋에 최대한 많은 정보를 뽑아내서 학습할 수 있게 한다. 
+
+- [ImageDataGenerator](https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html), [작은 데이터셋으로 강력한 이미지 분류 모델 설계하기
+](https://keraskorea.github.io/posts/2018-10-24-little_data_powerful_model/)
+
+<a name='2-1'></a>
+### ImageDataGenerator
+
+
+- `ImageDataGenerator()`
+  모델 학습 중 이미지에 임의변형 & 정규화 적용
+  
+     |Arguments | Meaning |
+   |:---:|-|  
+   | **rotation_range**| 이미지 회전 범위 (0~180)|
+   | **width_shift, height_shift** |수평/수직으로 랜덤평행 이동 범위 (원본 가로, 세로 길이에 대한 비율 값)
+   | **rescale** | 0-255 RGB > 1/255로 스케일링 0-1 범위로 변환 (제일 먼저 수행)|
+   | **shear_range**| 전단 변환(shearing transformation) 이미지를 어긋나보이게하는 범위|
+   | **zoom_range**| 랜덤 확대/축소 범위|
+   | **horizontal_flip**| True : 50% 확률로 이미지를 수평으로 뒤집는다.</br>원본에 수평 비대칭성이 없을 때 (뒤집어도 자연스러운 경우) 효과적이다.|
+   | **fill_mode**| 이미지 회전/이동/축소시 빈 공간을 채우는 방식 {‘constant’, ‘nearest’, ‘reflect’, ‘wrap’}|
+   
+ - 변형된 이미지를 배치 단위로 불러올 수 있는 generator 생성을 위한 2가지 함수
+    - `.flow(data, labels)`
+    - `.flow_from_directory(directory)` : to generate batches of image data (and their labels) directly from jpgs in their respective folders.
+  
+
+  
+```py
+# ImageDataGenerator 조건 설정 후 객체 생성
+train_datagen = ImageDataGenerator(
+                # value by which we will multiply the data before any other processing
+                rescale=1./255,  
+                
+                # (0-180) range within which to randomly rotate pictures
+                rotation_range=40,
+                
+                # ranges within which to randomly translate pictures vertically or horizontally
+                width_shift_range=0.2,
+                height_shift_range=0.2,
+                
+                # randomly applying shearing transformations
+                shear_range=0.2,
+                
+                # randomly zooming inside pictures
+                zoom_range=0.2,
+                
+                # randomly flipping half of the images horizontally
+                horizontal_flip=True,
+                
+                # strategy for filling in newly created pixels (after a rotation or a width/height shift)
+                fill_mode='nearest'
+                                    )
+
+train_generator = train_datagen.flow_from_directory( 
+                  TRAINING_DIR,           # target directory
+                  batch_size=100,        
+                  class_mode='binary',    # binary classification
+                  target_size=(150, 150)  # resize image to 150x150
+                  )
+
+```
+
+
+
+</br>
+</br>
+
+
 
 <a name='3'></a>
 ## 3 - Transfer Learning
