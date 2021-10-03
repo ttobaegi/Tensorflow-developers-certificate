@@ -27,11 +27,16 @@
 - **Autocorrelation**
 - **Noise**
 - **Stationarity** 정상성 
-  - Stationary time-sereis ![](https://images.velog.io/images/findingflow/post/8d4b4937-0b1f-4ff7-84fa-e471b2382c03/image.png)
-   - Non-stationary time-sereis ![](https://images.velog.io/images/findingflow/post/d810f9a7-d539-4086-9373-247757cb5a9c/image.png)
-- Autocorrelation 자기회귀 ![](https://images.velog.io/images/findingflow/post/c2a03bc8-8d43-4fb3-97f1-7c7ab15738aa/image.png)
-  - Multiple autocorrelation![](https://images.velog.io/images/findingflow/post/daecd98c-51e4-4105-926c-bd47773990c8/image.png)
-- Combination of trend & seasonality & autocorrelation & noise![](https://images.velog.io/images/findingflow/post/6ba06d14-5598-409f-aaca-d9b94af27b62/image.png)
+  - Stationary time-sereis 
+    ![](https://images.velog.io/images/findingflow/post/8d4b4937-0b1f-4ff7-84fa-e471b2382c03/image.png)
+   - Non-stationary time-sereis 
+    ![](https://images.velog.io/images/findingflow/post/d810f9a7-d539-4086-9373-247757cb5a9c/image.png)
+- Autocorrelation 자기회귀 
+    ![](https://images.velog.io/images/findingflow/post/c2a03bc8-8d43-4fb3-97f1-7c7ab15738aa/image.png)
+  - Multiple autocorrelation
+    ![](https://images.velog.io/images/findingflow/post/daecd98c-51e4-4105-926c-bd47773990c8/image.png)
+- Combination of trend & seasonality & autocorrelation & noise
+  ![](https://images.velog.io/images/findingflow/post/6ba06d14-5598-409f-aaca-d9b94af27b62/image.png)
 
 
 앞서 살펴본 특성을 가진 시계열 데이터를 생성해보자.
