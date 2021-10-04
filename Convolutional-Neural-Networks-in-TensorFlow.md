@@ -120,7 +120,9 @@ train_generator = train_datagen.flow_from_directory(
 -  Transfer learning with Inceptionv3
 [Inception v3](https://arxiv.org/pdf/1512.00567.pdf) 모델의 가중치를 불러와 전이학습을 수행해보자.
    - [tf.keras.applications.inception_v3.InceptionV3()](https://www.tensorflow.org/api_docs/python/tf/keras/applications/inception_v3/InceptionV3)
-   - InceptionV3 모델 구조![](https://images.velog.io/images/findingflow/post/b7e5c46b-aaa2-4d95-822a-afe566bfffcc/image.png) 
+   - InceptionV3 모델 구조
+   
+   ![](https://images.velog.io/images/findingflow/post/b7e5c46b-aaa2-4d95-822a-afe566bfffcc/image.png) 
 
 ```py
 import os
