@@ -1,6 +1,22 @@
 # Sequences, Time Series and Prediction
 
->#### Table of Contents
+> ### Objectives 
+> [텐서플로우 자격증 공식 가이드](https://www.tensorflow.org/extras/cert/TF_Certificate_Candidate_Handbook_ko.pdf?hl=ko)
+> - TensorFlow 에서 시계열 및 예측 문제를 해결하는 방법을 이해해야한다.
+>   - 시계열, 시퀀스, 예상 모델을 훈련, 조정 및 활용.
+>   - 모델을 학습하여 일변량 및 다변량 시계열 모두에 대한 값 예측.
+>   - 시계열을 학습하기 위한 데이터 준비.
+>   - 평균 절대 오차(MAE)를 이해하고 시퀀스 모델의 정확성을 평가하는 데 어떻게 평균 절대 오차가 사용되는지 이해.
+>   - 시계열, 시퀀스, 예상 모델의 RNN 및 CNN 활용.
+>   - 중앙 창과 후행 창을 언제 사용해야 하는지 파악.
+>   - 예측을 위해 TensorFlow 활용.
+>   - 기능 및 라벨 준비.
+>   - 시퀀스 편향 파악 및 보완.
+>   - 시계열, 시퀀스, 예상 모델에서 동적으로 학습율을 조정.
+
+
+
+> ### Table of Contents
 > - [1 - Sequences and Prediction](#1)
 >   - [Time Series](#1-1)
 >   - [Train / Validation / Test](#1-2)
