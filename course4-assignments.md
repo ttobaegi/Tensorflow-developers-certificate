@@ -18,13 +18,22 @@
 - Time Series
   - Univariate time series : single value at each time step.
     - ex. Hour by hour temperature
+    
     ![image](https://user-images.githubusercontent.com/79742748/136352506-e8bbf02d-c29c-4a80-93dd-9b72caafa2cf.png)
-  - Multivariate time series : multiple values at each time step.
+
+
+- Multivariate time series : multiple values at each time step.
     -  ex. Hour by hour weather 
+    
      ![image](https://user-images.githubusercontent.com/79742748/136358745-83063bbe-b829-4b00-bf5c-2a4182662717.png)
      ![image](https://user-images.githubusercontent.com/79742748/136358885-b0c83a59-c041-4e41-999a-a6261acc4cf0.png)
+
+
 - `imputation` : A projection of unknown (usually past or missing) data
+
   ![image](https://user-images.githubusercontent.com/79742748/136359563-ded8bbf7-6262-4b54-a4ae-a002bf09d6dc.png)
+
+
 - A sound wave is a good example of time series data (True)
 - `Seasonality` : A regular change in shape of the data. 
   - seen when patterns repeat at predictable intervals. 
