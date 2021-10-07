@@ -1,10 +1,10 @@
 
 >#### Table of Contents
 > - [1 - Introduction to TensorFlow](#1)
->   - [1.1 - Exercise 1](#1-1)
->   - [1.2 - Exercise 2](#1-2)
->   - [1.3 - Exercise 3](#1-3)
->   - [1.4 - Exercise 4](#1-4)
+>   - [Exercise 1](#1-1)
+>   - [Exercise 2](#1-2)
+>   - [Exercise 3](#1-3)
+>   - [Exercise 4](#1-4)
 
 </br>
 
