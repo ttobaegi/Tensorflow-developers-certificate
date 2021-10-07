@@ -1,11 +1,15 @@
 
+>#### Table of Contents
+> - [1 - Introduction to TensorFlow](#1)
+>   - [1.1 - Exercise 1](#1-1)
+>   - [1.2 - Exercise 2](#1-2)
+>   - [1.3 - Exercise 3](#1-3)
+>   - [1.4 - Exercise 4](#1-4)
 
-
+</br>
 
 <a name='1'></a>
 ## COURSE 1. Introduction to TensorFlow
-
-</br>
 
 <a name='1-1'></a>
 ### WEEK 1
@@ -131,8 +135,6 @@ def train_mnist():
 ```py
 # GRADED FUNCTION: train_mnist
 def train_mnist():
-    # Please write your code only where you are indicated.
-    # please do not remove # model fitting inline comments.
 
     # 사용자 정의 콜백 클래스 
     class myCallback(tf.keras.callbacks.Callback) :
@@ -140,6 +142,7 @@ def train_mnist():
             if logs.get('accuracy') is not None and logs.get('accuracy') >= 0.99 :
                 print('\nReached 99% accuracy so cancelling training!')
                 self.model.stop_training = True
+
     # 데이터 셋 로드 
     mnist = tf.keras.datasets.mnist
     (x_train, y_train),(x_test, y_test) = mnist.load_data(path=path)
@@ -156,6 +159,7 @@ def train_mnist():
         # YOUR CODE SHOULD END HERE
     ])
 
+    # model compile
     model.compile(optimizer='adam',
                   loss='sparse_categorical_crossentropy',
                   metrics=['accuracy'])
@@ -165,7 +169,7 @@ def train_mnist():
                         epochs = 10,
                         callbacks = [callbacks]
     )
-    # model fitting
+    
     return history.epoch, history.history['acc'][-1]
 
 train_mnist()
@@ -179,3 +183,19 @@ Epoch 10/10
 60000/60000 [==============================] - 9s 142us/sample - loss: 0.1856 - acc: 0.9638
 ([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 0.96383333)
 ```
+
+</br>
+</br>
+
+<a name='1-3'></a>
+### WEEK 3
+
+</br>
+</br>
+
+
+
+<a name='1-4'></a>
+### WEEK 4
+
+
