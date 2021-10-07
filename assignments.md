@@ -1,16 +1,18 @@
 
 
+
+
+<a name='1'></a>
 ## COURSE 1. Introduction to TensorFlow
 
 </br>
 
+<a name='1-1'></a>
 ### WEEK 1
-
-
 - `!pip install tensorflow==2.5.0`
 
 #### Quiz 1
-- The diagram for traditional programming had Rules and Data In, `Answers` came out?
+- The diagram for traditional programming had Rules and Data In, `Answers` came out.
 - The diagram for Machine Learning had Answers and Data In, `Rules` came out.
 - When I tell a computer what the data represents (i.e. this data is for walking, this data is for running), what is that process called? `Labelling the Data`
 - `Dense` : A layer of connected neurons
@@ -22,7 +24,6 @@ As the guesses get better and better, an accuracy approaches 100 percent, the te
 - `model.fit` trains the neural network to fit one set of values to another.
 
 #### Exercise 1 (Housing Prices)
-
   In this exercise you'll try to **build a neural network that predicts the price of a house according to a simple formula.**
 So, imagine if house pricing was as easy as a house costs 50k + 50k per bedroom, so that a 1 bedroom house costs 100k, a 2 bedroom house costs 150k etc.
 How would you create a neural network that learns this relationship so that it would predict a 7 bedroom house as costing close to 400k etc.
@@ -42,8 +43,9 @@ def house_model(y_new):
     model.compile(# Your Code Here#)
     model.fit(# Your Code here#)
     return model.predict(y_new)[0]
+```
 
-
+```py
 # GRADED FUNCTION: house_model
 def house_model(y_new):
     xs = np.array([1., 2., 3., 4., 5., 6.], dtype = float)
@@ -56,9 +58,7 @@ def house_model(y_new):
                  loss = 'mean_squared_error')
     model.fit(xs, ys, epochs=1000)
     return model.predict(y_new)[0]
-```
-
-```
+    
 prediction = house_model([7.0])
 print(prediction)    
 
@@ -78,3 +78,104 @@ Epoch 1000/1000
 </br>
 </br>
 
+<a name='1-2'></a>
+### WEEK 2
+#### Exercise 2 (Handwriting Recognition)
+In the course you learned how to do classificaiton using Fashion MNIST, a data set containing items of clothing. There's another, similar dataset called MNIST which has items of handwriting -- the digits 0 through 9. Write an **MNIST classifier** that trains to 99% accuracy or above, and does it without a fixed number of epochs -- i.e. you should stop training once you reach that level of accuracy.
+
+1. It should succeed in less than 10 epochs, so it is okay to change epochs= to 10, but nothing larger
+2. When it reaches 99% or greater it should print out the string "Reached 99% accuracy so cancelling training!"
+3. If you add any additional variables, make sure you use the same names as the ones used in the class
+
+```py
+import tensorflow as tf
+from os import path, getcwd, chdir
+
+# DO NOT CHANGE THE LINE BELOW. If you are developing in a local
+# environment, then grab mnist.npz from the Coursera Jupyter Notebook
+# and place it inside a local folder and edit the path to that location
+path = f"{getcwd()}/../tmp2/mnist.npz"
+
+# GRADED FUNCTION: train_mnist
+def train_mnist():
+    # Please write your code only where you are indicated.
+    # please do not remove # model fitting inline comments.
+
+    # YOUR CODE SHOULD START HERE
+
+    # YOUR CODE SHOULD END HERE
+
+    mnist = tf.keras.datasets.mnist
+    (x_train, y_train),(x_test, y_test) = mnist.load_data(path=path)
+    # YOUR CODE SHOULD START HERE
+
+    # YOUR CODE SHOULD END HERE
+    model = tf.keras.models.Sequential([
+        # YOUR CODE SHOULD START HERE
+    
+        # YOUR CODE SHOULD END HERE
+    ])
+
+    model.compile(optimizer='adam',
+                  loss='sparse_categorical_crossentropy',
+                  metrics=['accuracy'])
+    
+    # model fitting
+    history = model.fit(# YOUR CODE SHOULD START HERE
+              # YOUR CODE SHOULD END HERE
+    )
+    # model fitting
+    return history.epoch, history.history['acc'][-1]
+```
+
+```py
+# GRADED FUNCTION: train_mnist
+def train_mnist():
+    # Please write your code only where you are indicated.
+    # please do not remove # model fitting inline comments.
+
+    # 사용자 정의 콜백 클래스 
+    class myCallback(tf.keras.callbacks.Callback) :
+        def on_epoch_end(self, epoch, logs = {}) :
+            if logs.get('accuracy') is not None and logs.get('accuracy') >= 0.99 :
+                print('\nReached 99% accuracy so cancelling training!')
+                self.model.stop_training = True
+    # 데이터 셋 로드 
+    mnist = tf.keras.datasets.mnist
+    (x_train, y_train),(x_test, y_test) = mnist.load_data(path=path)
+
+    # 콜백 변수 생성 - 콜백 클래스 객체 호출
+    callbacks = myCallback()
+    
+    # 3 -layers NN
+    model = tf.keras.models.Sequential([
+        # YOUR CODE SHOULD START HERE
+        tf.keras.layers.Flatten(input_shape=(28,28)),
+        tf.keras.layers.Dense(512, activation = tf.nn.relu),
+        tf.keras.layers.Dense(10, activation = tf.nn.softmax)
+        # YOUR CODE SHOULD END HERE
+    ])
+
+    model.compile(optimizer='adam',
+                  loss='sparse_categorical_crossentropy',
+                  metrics=['accuracy'])
+    
+    # model fitting
+    history = model.fit( x_train, y_train, # training data
+                        epochs = 10,
+                        callbacks = [callbacks]
+    )
+    # model fitting
+    return history.epoch, history.history['acc'][-1]
+
+train_mnist()
+
+
+Epoch 1/10
+60000/60000 [==============================] - 9s 145us/sample - loss: 2.8917 - acc: 0.9067
+Epoch 2/10
+...
+Epoch 10/10
+60000/60000 [==============================] - 9s 142us/sample - loss: 0.1856 - acc: 0.9638
+([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 0.96383333)
+```
