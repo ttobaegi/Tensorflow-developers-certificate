@@ -104,10 +104,10 @@ tf.keras.layers.Dense(1),
 - The input shape for a univariate time series to a Conv1D : [None, 1]
 - `CSV` : the name of the Python library used to read CSVs.
 - `next(reader)` : when you read a CSV file with a header that you don’t want to read into your dataset, to execute before iterating through the file using a ‘reader’ object.
-- When you read a row from a reader and want to cast column 2 to another data type, for example, a float : float(row[2]) 
+- read a row from a reader and want to cast column 2 to another data type (float) : `float(row[2])` 
 - sunspot seasonality : 11 or 22 years depending on who you ask
 - neural network type do you think is best for predicting time series like our sunspots dataset : A combination of all of the above (RNN / LSTM, Convolutions, DNN)
-- MAE is a good analytic for measuring accuracy of predictions for time series. Because it doesn’t heavily punish larger errors like square errors do.
+- `MAE` : a good analytic for measuring accuracy of predictions for time series because it doesn’t heavily punish larger errors like square errors do.
 
 
 </br>
