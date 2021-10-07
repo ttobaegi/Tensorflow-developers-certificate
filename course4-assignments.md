@@ -65,7 +65,7 @@ x_valid = series[split_time:]
 
 
 
-- `lr property` : set the learning rate of the SGD optimizer? 
+- `lr property` : set the learning rate of the SGD optimizer
 - Use a LearningRateScheduler object in the callbacks namespace and assign that to the callback to amend the learning rate of the optimizer on the fly, after each epoch
 
 
