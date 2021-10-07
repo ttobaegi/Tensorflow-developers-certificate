@@ -1,10 +1,11 @@
 >#### Table of Contents
-> - [4 - Sequences, Time Series and Prediction](#4)
->   - [WEEK 1 Sequences and Prediction](#4-1)
->   - [WEEK 2 Deep Neural Networks for Time Series](#4-2)
->   - [WEEK 3 Recurrent Neural Networks for time series](#4-3)
->   - [WEEK 4 Real-world time series data](#4-4)
+> - [**COURSE 4 - Sequences, Time Series and Prediction**](#4)    
+>      [WEEK 1 Sequences and Prediction](#4-1)  
+>      [WEEK 2 Deep Neural Networks for Time Series](#4-2)    
+>      [WEEK 3 Recurrent Neural Networks for time series](#4-3)  
+>      [WEEK 4 Real-world time series data](#4-4)
 
+</br>
 </br>
 
 <a name='4'></a>
@@ -98,4 +99,17 @@ tf.keras.layers.Dense(1),
 
 <a name='4-4'></a>
 ### WEEK 4 Real-world time series data
+
+- `Conv1D` layer type : add a 1D convolution to the model for predicting time series data.
+- The input shape for a univariate time series to a Conv1D : [None, 1]
+- `CSV` : the name of the Python library used to read CSVs.
+- `next(reader)` : when you read a CSV file with a header that you don’t want to read into your dataset, to execute before iterating through the file using a ‘reader’ object.
+- When you read a row from a reader and want to cast column 2 to another data type, for example, a float : float(row[2]) 
+- sunspot seasonality : 11 or 22 years depending on who you ask
+- neural network type do you think is best for predicting time series like our sunspots dataset : A combination of all of the above (RNN / LSTM, Convolutions, DNN)
+- MAE is a good analytic for measuring accuracy of predictions for time series. Because it doesn’t heavily punish larger errors like square errors do.
+
+
+</br>
+</br>
 
