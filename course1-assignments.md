@@ -1,18 +1,14 @@
-
->#### Table of Contents
-> - [1 - Introduction to TensorFlow](#1)
->   - [WEEK 1 ](#1-1)
->   - [WEEK 2 ](#1-2)
->   - [WEEK 3 ](#1-3)
->   - [WEEK 4 ](#1-4)
+## COURSE 1 - Introduction to TensorFlow for Artificial Intelligence, Machine Learning, and Deep Learning
+>### Table of Contents
+> - [WEEK 1 A New Programming Paradigm](#1-1)
+> - [WEEK 2 Introduction to Computer Vision](#1-2)
+> - [WEEK 3 Enhancing Vision with Convolutional Neural Networks](#1-3)
+> - [WEEK 4 Using Real-world Images](#1-4)
 
 </br>
 
-<a name='1'></a>
-## COURSE 1. Introduction to TensorFlow
-
 <a name='1-1'></a>
-### WEEK 1
+### WEEK 1. A New Programming Paradigm
 - `!pip install tensorflow==2.5.0`
 
 #### Quiz 1
@@ -83,7 +79,7 @@ Epoch 1000/1000
 </br>
 
 <a name='1-2'></a>
-### WEEK 2
+### WEEK 2. Introduction to Computer Vision
 #### Exercise 2 (Handwriting Recognition)
 In the course you learned how to do classificaiton using Fashion MNIST, a data set containing items of clothing. There's another, similar dataset called MNIST which has items of handwriting -- the digits 0 through 9. Write an **MNIST classifier** that trains to 99% accuracy or above, and does it without a fixed number of epochs -- i.e. you should stop training once you reach that level of accuracy.
 
@@ -188,7 +184,7 @@ Epoch 10/10
 </br>
 
 <a name='1-3'></a>
-### WEEK 3
+### WEEK 3. Enhancing Vision with Convolutional Neural Networks
 
 </br>
 </br>
@@ -196,6 +192,7 @@ Epoch 10/10
 
 
 <a name='1-4'></a>
-### WEEK 4
+### WEEK 4. Using Real-world Images
 
-
+</br>
+</br>
