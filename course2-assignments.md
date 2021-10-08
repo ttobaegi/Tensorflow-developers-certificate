@@ -14,7 +14,7 @@
   - The ability to easily load images for training
   - The ability to pick the size of training images
   - The ability to automatically label images based on their directory name
-- change in size
+- The size of output image after Convolution/Pooling layers
   - Input Image size : 150x150
     1. Pass a 3x3 Convolution over it : the size of resulting image is 148x148
     2. Use Pooling of size 2x2 : the size of resulting image is 75x75
