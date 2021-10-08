@@ -1,6 +1,5 @@
-
+## COURSE 3 - Natural Language Processing in TensorFlow
 > ### Table of Contents
-> - [**COURSE 3 - Natural Language Processing in TensorFlow**](#3)  
 >    - [WEEK 1 Sentiment in text](#3-1)      
 >    - [WEEK 2 Word Embeddings](#3-2)      
 >    - [WEEK 3 Sequence models](#3-3)      
@@ -9,13 +8,8 @@
 </br>
 </br>
 
-<a name='3'></a>
-## COURSE 3. Natural Language Processing in TensorFlow
-
-</br>
-
 <a name='3-1'></a>
-### WEEK 1 Sentiment in text
+### WEEK 1. Sentiment in text
 
 - `Tokenizer` : the object used to tokenize sentences
 - `fit_on_texts(sentences)` : the method used to tokenize a list of sentences
@@ -36,7 +30,7 @@ Pass padding=’post’ to pad_sequences when initializing it
 </br>
 
 <a name='3-2'></a>
-### WEEK 2 Word Embeddings
+### WEEK 2. Word Embeddings
 -  the TensorFlow library containing common data that you can use to train and test neural networks?
 TensorFlow Data Libraries
 TensorFlow Data
@@ -46,83 +40,38 @@ TensorFlow Datasets (TFDS)
 - How are the labels for the IMDB dataset encoded? Reviews encoded as a number 0-1
 - What is the purpose of the embedding dimension?
 It is the number of dimensions for the vector representing the word encoding
-
 - When tokenizing a corpus, what does the num_words=n parameter do?
-
 It specifies the maximum number of words to be tokenized, and picks the most common ‘n’ words
-- To use word embeddings in TensorFlow, in a sequential layer, what is the name of the class?
-
-tf.keras.layers.Embedding
-
-- IMDB Reviews are either positive or negative. What type of loss function should be used in this scenario?
-
-Binary crossentropy
-- `IMDB Sub Words dataset`, our results in classification were poor. Why?
-
-Sequence becomes much more important when dealing with subwords, but we’re ignoring word positions
-
-
+- `tf.keras.layers.Embedding` to use word embeddings in TensorFlow, in a sequential layer.
+- The type of loss function for IMDB Reviews(either positive or negative) : `Binary crossentropy`
+- The results of using IMDB Sub Words dataset in classification was poor. Because sequence becomes much more important when dealing with subwords, but `we’re ignoring word positions`.
 
 </br>
 </br>
 
 <a name='3-3'></a>
-### WEEK 3 Sequence models
-
-- Why does sequence make a large difference when determining semantics of language?
-Because the order in which words appear dictate their meaning
-Because the order of words doesn’t matter
-It doesn’t
-Because the order in which words appear dictate their impact on the meaning of the sentence
-- How do Recurrent Neural Networks help you understand the impact of sequence on meaning?
-They shuffle the words evenly
-They look at the whole sentence at a time
-They carry meaning from one cell to the next
-They don’t
-
-- How does an LSTM help understand meaning when words that qualify each other aren’t necessarily beside each other in a sentence?
-They don’t
-They load all words into a cell state
-They shuffle the words randomly
+### WEEK 3. Sequence models
+- `Sequence` make a large difference when determining semantics of language. Because the `order` in which words appear dictate their impact on the meaning of the sentence.
+- Recurrent Neural Networks help you understand the impact of sequence on meaning by `carrying meaning from one cell to the next`.
+- LSTM help understand meaning when words that qualify each other aren’t necessarily beside each other in a sentence?
 Values from earlier words can be carried to later ones via a cell state
-
-- What keras layer type allows LSTMs to look forward and backward in a sentence?
-Bothdirection
-Bidirectional
-Bilateral
-Unilateral
-
-- What’s the output shape of a bidirectional LSTM layer with 64 units?
-(128,1)
-(128,None)
-(None, 64)
-(None, 128)
-
-- When stacking LSTMs, how do you instruct an LSTM to feed the next one in the sequence?
-Do nothing, TensorFlow handles this automatically
-Ensure that return_sequences is set to True only on units that feed to another LSTM
-Ensure that they have the same number of units
-Ensure that return_sequences is set to True on all units
-
-- If a sentence has 120 tokens in it, and a Conv1D with 128 filters with a Kernal size of 5 is passed over it, what’s the output shape?
-(None, 120, 124)
-(None, 120, 128)
-(None, 116, 124)
-(None, 116, 128)
-
-- the best way to avoid overfitting in NLP datasets?
-Use LSTMs
-Use GRUs
-Use Conv1D
-None of the above
-
+- `Bidirectional` allows LSTMs to look forward and backward in a sentence?
+- The output shape of a bidirectional LSTM layer with 64 units is (None, `128`)
+- When stacking LSTMs, ensure that `return_sequences = True` only on units that feed to another LSTM to feed the next one in the sequence.
+- The best way to avoid overfitting in NLP datasets : None of the above (Use LSTMs, Use GRUs, Use Conv1D)
 Remember that with text, you'll probably get a bit more overfitting than you would have done with images. Not least because you'll almost always have out of vocabulary words in the validation data set. That is words in the validation dataset that weren't present in the training, naturally leading to overfitting. These words can't be classified and, of course, you're going to have these overfitting issues, but see what you can do to avoid them.
 
 </br>
 </br>
 
 <a name='3-4'></a>
-### WEEK 4 Sequence models and literature
+### WEEK 4. Sequence models and literature
+- `fit_on_texts(sentences)` : the method used to tokenize a list of sentences.
+- Sentence with 120 tokens & Conv1D with 128 filters with a Kernal size of 5 is passed over it, the output shape : (None, 116, 128)
+- The purpose of the `embedding dimension` :  the number of dimensions for the vector representing the word encoding.
+- `pad_sequences` object from the tensorflow.keras.preprocessing.sequence namespace : If you have a number of sequences of different lengths, how do you ensure that they are understood when fed into a neural network?
+- When predicting words to generate poetry, the more words predicted the more likely it will end up gibberish. Because the probability that each word matches an existing phrase goes down the more words you create
+- The major drawback of word-based training for text generation instead of character-based generation is that there are far more words in a typical corpus than characters, it is much more memory intensive.
 
 
 </br>
