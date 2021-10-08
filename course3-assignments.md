@@ -109,14 +109,14 @@ Ensure that return_sequences is set to True on all units
 (None, 120, 128)
 (None, 116, 124)
 (None, 116, 128)
-8.
-Question 8
-- What’s the best way to avoid overfitting in NLP datasets?
+
+- the best way to avoid overfitting in NLP datasets?
 Use LSTMs
 Use GRUs
 Use Conv1D
 None of the above
 
+Remember that with text, you'll probably get a bit more overfitting than you would have done with images. Not least because you'll almost always have out of vocabulary words in the validation data set. That is words in the validation dataset that weren't present in the training, naturally leading to overfitting. These words can't be classified and, of course, you're going to have these overfitting issues, but see what you can do to avoid them.
 
 </br>
 </br>
