@@ -1,14 +1,14 @@
-## COURSE 3 - Convolutional Neural Networks in TensorFlow
+## COURSE 2 - Convolutional Neural Networks in TensorFlow
 >### Table of Contents   
-> - [WEEK 1 Exploring a Larger Dataset](#3-1)        
-> - [WEEK 2 Augmentation: A technique to avoid overfitting](#3-2)         
-> - [WEEK 3 Transfer Learning](#3-3)          
-> - [WEEK 4 Multiclass Classifications](#3-4)          
+> - [WEEK 1 Exploring a Larger Dataset](#2-1)        
+> - [WEEK 2 Augmentation: A technique to avoid overfitting](#2-2)         
+> - [WEEK 3 Transfer Learning](#2-3)          
+> - [WEEK 4 Multiclass Classifications](#2-4)          
 
 </br>
 </br>
 
-<a name='3-1'></a>
+<a name='2-1'></a>
 ### WEEK 1. Exploring a Larger Dataset
 - `flow_from_directory` on the ImageGenerator
   - The ability to easily load images for training
@@ -31,7 +31,7 @@
 </br>
 </br>
 
-<a name='3-2'></a>
+<a name='2-2'></a>
 ### WEEK 2. Augmentation: A technique to avoid overfitting
 - `Image Augmentation`
   - Manipulates the **training set** to generate more scenarios for features in the images **to solve overfitting**.
@@ -45,7 +45,7 @@
 </br>
 </br>
 
-<a name='3-3'></a>
+<a name='2-3'></a>
 ### WEEK 3. Transfer Learning
 - `Transfer Learning` Models 
   - `Transfer learning` is useful. Because I can use the features that were learned from large datasets that I may not have access to.
@@ -64,7 +64,7 @@
 </br>
 </br>
 
-<a name='3-4'></a>
+<a name='2-4'></a>
 ### WEEK 4. Multiclass Classifications
 - The diagram for traditional programming had Rules and Data In, Answers came out.
 - DNN for Fashion MNIST have `10 output neurons`, which mean the dataset has `10 classes`
