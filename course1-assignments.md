@@ -10,8 +10,6 @@
 <a name='1-1'></a>
 ### WEEK 1. A New Programming Paradigm
 - `!pip install tensorflow==2.5.0`
-
-#### Quiz 1
 - The diagram for traditional programming had Rules and Data In, `Answers` came out.
 - The diagram for Machine Learning had Answers and Data In, `Rules` came out.
 - When I tell a computer what the data represents (i.e. this data is for walking, this data is for running), what is that process called? `Labelling the Data`
