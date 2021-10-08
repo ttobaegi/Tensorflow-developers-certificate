@@ -1,10 +1,9 @@
-
->#### Table of Contents
-> - [**COURSE 3 - Convolutional Neural Networks in TensorFlow**](#4)    
->      [WEEK 1 Exploring a Larger Dataset](#3-1)
->      [WEEK 2 Augmentation: A technique to avoid overfitting](#3-2)
->      [WEEK 3 Transfer Learning](#3-3) 
->      [WEEK 4 Multiclass Classifications](#3-4)
+# COURSE 3 - Convolutional Neural Networks in TensorFlow
+>### Table of Contents   
+> - [WEEK 1 Exploring a Larger Dataset](#3-1)        
+> - [WEEK 2 Augmentation: A technique to avoid overfitting](#3-2)         
+> - [WEEK 3 Transfer Learning](#3-3)          
+> - [WEEK 4 Multiclass Classifications](#3-4)          
 
 </br>
 </br>
