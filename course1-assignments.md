@@ -78,6 +78,14 @@ Epoch 1000/1000
 
 <a name='1-2'></a>
 ### WEEK 2. Introduction to Computer Vision
+
+- Fashion MNIST : 70,000 of 28x28 Greyscale Fashion images used
+- 10 output neurons : 10 different labels
+- `Relu` : It only returns x if x is greater than zero
+- Spliting data into training and test sets to test a network with previously unseen data.
+- `on_epoch_end` method gets called when an epoch finishes.
+- `callbacks=` parameter to you set in your fit function to tell it to use callbacks.
+
 #### Exercise 2 (Handwriting Recognition)
 In the course you learned how to do classificaiton using Fashion MNIST, a data set containing items of clothing. There's another, similar dataset called MNIST which has items of handwriting -- the digits 0 through 9. Write an **MNIST classifier** that trains to 99% accuracy or above, and does it without a fixed number of epochs -- i.e. you should stop training once you reach that level of accuracy.
 
@@ -141,10 +149,12 @@ def train_mnist():
     mnist = tf.keras.datasets.mnist
     (x_train, y_train),(x_test, y_test) = mnist.load_data(path=path)
 
-    # 콜백 변수 생성 - 콜백 클래스 객체 호출
+    # Normalization
+    x_train, x_test = x_train / 255.0, x_test / 255.0
+    # callback 변수 생성
     callbacks = myCallback()
     
-    # 3 -layers NN
+    # 3-layers NN
     model = tf.keras.models.Sequential([
         # YOUR CODE SHOULD START HERE
         tf.keras.layers.Flatten(input_shape=(28,28)),
@@ -184,6 +194,13 @@ Epoch 10/10
 <a name='1-3'></a>
 ### WEEK 3. Enhancing Vision with Convolutional Neural Networks
 
+- `Convolution` : A technique to isolate features in images.
+- `Pooling` : A technique to reduce the information in an image while maintaining features.
+- After passing a `3x3 filter` over a 28x28 image, output will be `26x26`
+- After `max pooling` a 26x26 image with a `2x2 filter`, the output will be `13x13`
+- Applying Convolutions on top of our Deep neural network will make training
+It depends on many factors. It might make your training faster or slower, and a poorly designed Convolutional layer may even be less efficient than a plain DNN!
+
 </br>
 </br>
 
@@ -191,6 +208,18 @@ Epoch 10/10
 
 <a name='1-4'></a>
 ### WEEK 4. Using Real-world Images
+
+- Using Image Generator, label images based on the directory the image is contained in.
+- `rescale` method on the Image Generator is used to normalize the image.
+- `target_size` parameter on the training generator to specify the training size for the images.
+- input_shape (300, 300, 3) : Every Image will be 300x300 pixels, with 3 bytes to define color
+- `overfitting on your training data` : If your training data is close to 1.000 accuracy, but your validation data isn’t.
+- The reason why `Convolutional Neural Networks` are better for classifying images like horses and humans
+  - In these images, the features may be in different parts of the frame.
+  - There’s a wide variety of horses.
+  - There’s a wide variety of humans.
+- After reducing the size of the images, the training results were different. We removed some convolutions to handle the smaller images
+
 
 </br>
 </br>
