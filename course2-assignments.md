@@ -159,10 +159,22 @@ history = model.fit_generator(train_generator,
   - When using Image Augmentation, my training gets little **slower**. Because the image processing takes cycles.
   - effectively simulates having a larger data set for training.
   - When using Image Augmentation with the ImageDataGenerator, **Nothing happens to your raw image data on-disk, all augmentation is done in-memory**
-   - `ImageDataGenerator()`
-     - `fill_mode` : attempts to recreate lost information after a transformation like a shear. (이미지 회전/이동/축소시 빈 공간을 채우는 방식 {‘constant’, ‘nearest’, ‘reflect’, ‘wrap’})
-     - `horizontal_flip` : If my training data only has people facing left, but I want to classify people facing right, how would I avoid overfitting?
+- `ImageDataGenerator()` : 모델 학습 중 이미지에 임의변형 & 정규화 적용
 
+    |Arguments | Meaning |
+   |:---|-|  
+   | **rotation_range**| 이미지 회전 범위 (0~180)|
+   | **width_shift, height_shift** |수평/수직으로 랜덤평행 이동 범위 (원본 가로, 세로 길이에 대한 비율 값)
+   | **rescale** | 0-255 RGB > 1/255로 스케일링 0-1 범위로 변환 (제일 먼저 수행)|
+   | **shear_range**| 전단 변환(shearing transformation) 이미지를 어긋나보이게하는 범위|
+   | **zoom_range**| 랜덤 확대/축소 범위|
+   | **horizontal_flip**| True : 50% 확률로 이미지를 수평으로 뒤집는다.</br>원본에 수평 비대칭성이 없을 때 (뒤집어도 자연스러운 경우) 효과적이다.|
+   | **fill_mode**| attempts to recreate lost information after a transformation like a shear.</br>이미지 회전/이동/축소시 빈 공간을 채우는 방식 {‘constant’, ‘nearest’, ‘reflect’, ‘wrap’}|
+
+  - `horizontal_flip` : If my training data only has people facing left, but I want to classify people facing right, how would I avoid overfitting? 
+ - 변형된 이미지를 배치 단위로 불러올 수 있는 generator 생성을 위한 2가지 함수
+    - `.flow(data, labels)`
+    - `.flow_from_directory(directory)` : to generate batches of image data (and their labels) directly from jpgs in their respective folders.
 </br>
 </br>
 
