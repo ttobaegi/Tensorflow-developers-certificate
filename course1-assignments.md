@@ -352,7 +352,21 @@ Reached 99% accuracy so cancelling training!
 - Create a convolutional neural network that trains to 100% accuracy on these images
 - cancel the training upon hitting training accuracy of >.999
 - Hint : it will work best with 3 convolutional layers.
+
 ```py
+# Import Modules
+import tensorflow as tf
+import os
+import zipfile
+from os import path, getcwd, chdir
+
+# Environment, then grab happy-or-sad.zip from the Coursera Jupyter Notebook
+# and place it inside a local folder and edit the path to that location
+path = f"{getcwd()}/../tmp2/happy-or-sad.zip"
+zip_ref = zipfile.ZipFile(path, 'r')
+zip_ref.extractall("/tmp/h-or-s")
+zip_ref.close()
+
 # GRADED FUNCTION: train_happy_sad_model
 def train_happy_sad_model():
     # Please write your code only where you are indicated.
@@ -360,38 +374,39 @@ def train_happy_sad_model():
 
     DESIRED_ACCURACY = 0.999
 
-    class myCallback(# your code):
-         # Your Code
-
+    class myCallback(# keras callback method):
+         '''
+         Define Custom Callback class - on_epoch_end
+         '''
+         
     callbacks = myCallback()
     
-    # This Code Block should Define and Compile the Model. Please assume the images are 150 X 150 in your implementation.
+    # This Code Block should Define and Compile the Model. The images are 150 X 150.
     model = tf.keras.models.Sequential([
             # Your Code Here
             '''
-            
+            3 convolutional layers followed by MaxPooling layers
+            Flatten layer
+            2 Dense layers
             '''
                                       ])
 
     from tensorflow.keras.optimizers import RMSprop
-
     model.compile(# Your Code Here
                   '''
-                  
+                  optimizer= , loss='', metrics=['accuracy']
                   '''
                   )
         
 
-    # This code block should create an instance of an ImageDataGenerator called train_datagen 
+    # Create an instance of an ImageDataGenerator called train_datagen 
     # And a train_generator by calling train_datagen.flow_from_directory
-
     from tensorflow.keras.preprocessing.image import ImageDataGenerator
-
     train_datagen = # Your Code Here
                     '''
                     
                     '''
-    # Please use a target_size of 150 X 150.
+    # Use a target_size of 150 X 150.
     train_generator = train_datagen.flow_from_directory(# Your Code Here
                                                         
                                                         )
@@ -407,8 +422,93 @@ def train_happy_sad_model():
                                  )
     # model fitting
     return history.history['accuracy'][-1]
-```
 
+# The Expected output: "Reached 99.9% accuracy so cancelling training!""
+train_happy_sad_model()
+```
+```py
+# GRADED FUNCTION: train_happy_sad_model
+def train_happy_sad_model():
+    # Please write your code only where you are indicated.
+    # please do not remove # model fitting inline comments.
+
+    DESIRED_ACCURACY = 0.999
+
+    class myCallback(tf.keras.callbacks.Callback):
+        def on_epoch_end(self, epoch, logs={}):
+            if logs.get('accuracy') is not None and logs.get('accuracy')> DESIRED_ACCURACY:
+                print('\nReached 99.9% accuracy so cancelling training!')
+                self.model.stop_training = True
+         
+            # Your Code
+    callbacks = myCallback()
+    
+    # This Code Block should Define and Compile the Model. 
+    # Please assume the images are 150 X 150 in your implementation.
+    model = tf.keras.models.Sequential([
+        # Your Code Here
+            tf.keras.layers.Conv2D(16, (3,3), activation = 'relu', input_shape=(150,150,3)), 
+            tf.keras.layers.MaxPooling2D(2,2),
+            tf.keras.layers.Conv2D(32, (3,3), activation = 'relu'),
+            tf.keras.layers.MaxPooling2D(2,2),
+            tf.keras.layers.Conv2D(32, (3,3), activation = 'relu'),
+            tf.keras.layers.MaxPooling2D(2,2),
+            tf.keras.layers.Flatten(),
+            tf.keras.layers.Dense(512, activation = 'relu'),
+            tf.keras.layers.Dense(1, activation = 'sigmoid')
+    ])
+
+    from tensorflow.keras.optimizers import RMSprop
+
+    model.compile(# Your Code Here
+                  optimizer = RMSprop(lr=0.0001),
+                  loss = 'binary_crossentropy',
+                  metrics = ['accuracy']
+                  )
+        
+
+    # This code block should create an instance of an ImageDataGenerator called train_datagen 
+    # And a train_generator by calling train_datagen.flow_from_directory
+
+    from tensorflow.keras.preprocessing.image import ImageDataGenerator
+
+    train_datagen = ImageDataGenerator(rescale = 1/255.) # Your Code Here
+    
+
+    # Please use a target_size of 150 X 150.
+    train_generator = train_datagen.flow_from_directory( # Your Code Here
+                                                         '/tmp/h-or-s',           # directory
+                                                         target_size = (150,150), # target size
+                                                         class_mode = 'binary',   # class mode
+                                                         batch_size = 10          # batch size
+                                                       )
+        
+    # Expected output: 'Found 80 images belonging to 2 classes'
+
+    # This code block should call model.fit_generator and train for
+    # a number of epochs.
+    # model fitting
+    history = model.fit_generator( # Your Code Here
+                                  train_generator,
+                                  steps_per_epoch = 8,
+                                  epochs = 25,
+                                  verbose = 1,
+                                  callbacks = [callbacks]
+                                  )
+          
+    # model fitting
+    return history.history['accuracy'][-1]
+
+train_happy_sad_model()
+Found 80 images belonging to 2 classes.
+Epoch 1/25
+8/8 [==============================] - 17s 2s/step - loss: 0.7523 - accuracy: 0.5250
+....
+Epoch 16/25
+8/8 [==============================] - 11s 1s/step - loss: 0.0688 - accuracy: 1.0000
+
+Reached 99.9% accuracy so cancelling training!
+```
 
 
 
