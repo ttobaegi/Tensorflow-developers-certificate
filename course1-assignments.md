@@ -10,8 +10,9 @@
 <a name='1-1'></a>
 ### WEEK 1. A New Programming Paradigm
 - `!pip install tensorflow==2.5.0`
-- The diagram for traditional programming had Rules and Data In, `Answers` came out.
-- The diagram for Machine Learning had Answers and Data In, `Rules` came out.
+- New parogramming paradigm
+  - The diagram for traditional programming had Rules and Data In, `Answers` came out.
+  - The diagram for Machine Learning had Answers and Data In, `Rules` came out.
 - When I tell a computer what the data represents (i.e. this data is for walking, this data is for running), what is that process called? `Labelling the Data`
 - `Dense` : A layer of connected neurons
  It will then use the data that it knows about, that's the set of Xs and Ys that we've already seen to measure how good or how bad its guess was. The loss function measures this and then gives the data to the optimizer which figures out the next guess.
@@ -83,7 +84,7 @@ Epoch 1000/1000
 - `Relu` : It only returns x if x is greater than zero
 - Spliting data into training and test sets to test a network with previously unseen data.
 - `on_epoch_end` method gets called when an epoch finishes.
-- `callbacks=` parameter to you set in your fit function to tell it to use callbacks.
+- `callbacks=` parameter to set in fit function to tell it to use callbacks.
 
 </br>
 
@@ -144,7 +145,7 @@ def train_mnist():
                         callback =
                         '''
                         # YOUR CODE SHOULD END HERE
-    )
+                       )
     # model fitting
     return history.epoch, history.history['acc'][-1]
 ```
@@ -182,14 +183,13 @@ def train_mnist():
     
     # model fitting
     history = model.fit( x_train, y_train, # training data
-                        epochs = 10,
-                        callbacks = [callbacks]
-    )
+                         epochs = 10,
+                         callbacks = [callbacks]
+                       )
     
     return history.epoch, history.history['acc'][-1]
 
 train_mnist()
-
 
 Epoch 1/9
 60000/60000 [==============================] - 11s 180us/sample - loss: 0.1988 - acc: 0.9412
@@ -214,6 +214,10 @@ It depends on many factors. It might make your training faster or slower, and a 
 </br>
 
 #### Exercise 3 (Fashion MNIST with Convolutions)
+- improve Fashion MNIST to 99.8% accuracy or more using only a single convolutional layer and a single MaxPooling 2D. 
+- stop training once the accuracy goes above this amount. It should happen in less than 20 epochs, so it's ok to hard code the number of epochs for training, but your training must end once it hits the above metric. If it doesn't, then you'll need to redesign your layers.
+  - When 99.8% accuracy has been hit, you should print out the string "Reached 99.8% accuracy so cancelling training!"
+
 ```py
 import tensorflow as tf
 from os import path, getcwd, chdir
@@ -233,18 +237,24 @@ def train_mnist_conv():
     # please do not remove model fitting inline comments.
 
     # YOUR CODE STARTS HERE
-    
+    '''
+    Custom Callback class - on_epoch_end()
+    '''
     # YOUR CODE ENDS HERE
 
     mnist = tf.keras.datasets.mnist
     (training_images, training_labels), (test_images, test_labels) = mnist.load_data(path=path)
     # YOUR CODE STARTS HERE
-
+    '''
+    
+    '''
     # YOUR CODE ENDS HERE
 
     model = tf.keras.models.Sequential([
             # YOUR CODE STARTS HERE
-
+            '''
+            
+            '''
             # YOUR CODE ENDS HERE
     ])
 
@@ -335,9 +345,13 @@ Reached 99% accuracy so cancelling training!
   - There’s a wide variety of horses.
   - There’s a wide variety of humans.
 - After reducing the size of the images, the training results were different. We removed some convolutions to handle the smaller images
+</br>
 
 #### Exercise 4 (Handling complex images)
-
+- happy or sad dataset which contains 80 images, 40 happy and 40 sad. 
+- Create a convolutional neural network that trains to 100% accuracy on these images
+- cancel the training upon hitting training accuracy of >.999
+- Hint : it will work best with 3 convolutional layers.
 ```py
 # GRADED FUNCTION: train_happy_sad_model
 def train_happy_sad_model():
@@ -353,12 +367,19 @@ def train_happy_sad_model():
     
     # This Code Block should Define and Compile the Model. Please assume the images are 150 X 150 in your implementation.
     model = tf.keras.models.Sequential([
-        # Your Code Here
-    ])
+            # Your Code Here
+            '''
+            
+            '''
+                                      ])
 
     from tensorflow.keras.optimizers import RMSprop
 
-    model.compile(# Your Code Here #)
+    model.compile(# Your Code Here
+                  '''
+                  
+                  '''
+                  )
         
 
     # This code block should create an instance of an ImageDataGenerator called train_datagen 
@@ -367,19 +388,25 @@ def train_happy_sad_model():
     from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
     train_datagen = # Your Code Here
-
+                    '''
+                    
+                    '''
     # Please use a target_size of 150 X 150.
-    train_generator = train_datagen.flow_from_directory(
-        # Your Code Here)
+    train_generator = train_datagen.flow_from_directory(# Your Code Here
+                                                        
+                                                        )
     # Expected output: 'Found 80 images belonging to 2 classes'
 
     # This code block should call model.fit_generator and train for
     # a number of epochs.
     # model fitting
-    history = model.fit_generator(
-          # Your Code Here)
+    history = model.fit_generator( # Your Code Here  
+                                 '''
+                                 
+                                 '''
+                                 )
     # model fitting
-    return history.history['acc'][-1]
+    return history.history['accuracy'][-1]
 ```
 
 
