@@ -26,7 +26,128 @@
   - based on images that the model hasn't been trained with.
 - `Overfitting` 
   - more likely to occur on smaller datasets. (less likelihood of all possible features being encountered in the training process.)
+</br>
 
+#### Exercise 1. Cats vs. Dogs 
+```py
+# ATTENTION: Please do not alter any of the provided code in the exercise. Only add your own code where indicated
+# ATTENTION: Please do not add or remove any cells in the exercise. The grader will check specific cells based on the cell position.
+# ATTENTION: Please use the provided epoch values when training.
+
+# In this exercise you will train a CNN on the FULL Cats-v-dogs dataset
+# This will require you doing a lot of data preprocessing because
+# the dataset isn't split into training and validation for you
+# This code block has all the required inputs
+import os
+import zipfile
+import random
+import tensorflow as tf
+import shutil
+from tensorflow.keras.optimizers import RMSprop
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from shutil import copyfile
+from os import getcwd
+
+path_cats_and_dogs = f"{getcwd()}/../tmp2/cats-and-dogs.zip"
+shutil.rmtree('/tmp')
+local_zip = path_cats_and_dogs
+zip_ref = zipfile.ZipFile(local_zip, 'r')
+zip_ref.extractall('/tmp')
+zip_ref.close()
+
+print(len(os.listdir('/tmp/PetImages/Cat/')))
+print(len(os.listdir('/tmp/PetImages/Dog/')))
+# Expected Output:
+# 1500
+# 1500
+
+
+# Use os.mkdir to create your directories
+# You will need a directory for cats-v-dogs, and subdirectories for training
+# and testing. These in turn will need subdirectories for 'cats' and 'dogs'
+try:
+    #YOUR CODE GOES HERE
+except OSError:
+    pass
+
+
+# Write a python function called split_data which takes
+# a SOURCE directory containing the files
+# a TRAINING directory that a portion of the files will be copied to
+# a TESTING directory that a portion of the files will be copie to
+# a SPLIT SIZE to determine the portion
+# The files should also be randomized, so that the training set is a random
+# X% of the files, and the test set is the remaining files
+# SO, for example, if SOURCE is PetImages/Cat, and SPLIT SIZE is .9
+# Then 90% of the images in PetImages/Cat will be copied to the TRAINING dir
+# and 10% of the images will be copied to the TESTING dir
+# Also -- All images should be checked, and if they have a zero file length,
+# they will not be copied over
+#
+# os.listdir(DIRECTORY) gives you a listing of the contents of that directory
+# os.path.getsize(PATH) gives you the size of the file
+# copyfile(source, destination) copies a file from source to destination
+# random.sample(list, len(list)) shuffles a list
+def split_data(SOURCE, TRAINING, TESTING, SPLIT_SIZE):
+# YOUR CODE STARTS HERE
+'''
+
+'''
+# YOUR CODE ENDS HERE
+
+CAT_SOURCE_DIR = "/tmp/PetImages/Cat/"
+TRAINING_CATS_DIR = "/tmp/cats-v-dogs/training/cats/"
+TESTING_CATS_DIR = "/tmp/cats-v-dogs/testing/cats/"
+DOG_SOURCE_DIR = "/tmp/PetImages/Dog/"
+TRAINING_DOGS_DIR = "/tmp/cats-v-dogs/training/dogs/"
+TESTING_DOGS_DIR = "/tmp/cats-v-dogs/testing/dogs/"
+
+split_size = .9
+split_data(CAT_SOURCE_DIR, TRAINING_CATS_DIR, TESTING_CATS_DIR, split_size)
+split_data(DOG_SOURCE_DIR, TRAINING_DOGS_DIR, TESTING_DOGS_DIR, split_size)
+
+print(len(os.listdir('/tmp/cats-v-dogs/training/cats/')))# 1350
+print(len(os.listdir('/tmp/cats-v-dogs/training/dogs/')))# 1350
+print(len(os.listdir('/tmp/cats-v-dogs/testing/cats/')))# 150
+print(len(os.listdir('/tmp/cats-v-dogs/testing/dogs/')))# 150
+
+
+# DEFINE A KERAS MODEL TO CLASSIFY CATS V DOGS
+# USE AT LEAST 3 CONVOLUTION LAYERS
+model = tf.keras.models.Sequential([
+# YOUR CODE HERE
+])
+
+model.compile(optimizer=RMSprop(lr=0.001), loss='binary_crossentropy', metrics=['acc'])
+
+
+#### NOTE 
+# In the cell below you **MUST** use a batch size of 10 (`batch_size=10`) for the `train_generator` and the `validation_generator`. 
+# Using a batch size greater than 10 will exceed memory limits on the Coursera platform.
+TRAINING_DIR = #YOUR CODE HERE
+train_datagen = #YOUR CODE HERE
+
+# NOTE: YOU MUST USE A BATCH SIZE OF 10 (batch_size=10) FOR THE 
+# TRAIN GENERATOR.
+train_generator = #YOUR CODE HERE
+VALIDATION_DIR = #YOUR CODE HERE
+validation_datagen = #YOUR CODE HERE
+
+# NOTE: YOU MUST USE A BACTH SIZE OF 10 (batch_size=10) FOR THE 
+# VALIDATION GENERATOR.
+validation_generator = #YOUR CODE HERE 
+
+# Expected Output: Found 2700 images belonging to 2 classes. Found 300 images belonging to 2 classes.
+
+history = model.fit_generator(train_generator,
+                              epochs=2,
+                              verbose=1,
+                              validation_data=validation_generator)
+
+```
+```py
+
+```
 
 </br>
 </br>
