@@ -86,6 +86,8 @@ Epoch 1000/1000
 - `on_epoch_end` method gets called when an epoch finishes.
 - `callbacks=` parameter to you set in your fit function to tell it to use callbacks.
 
+</br>
+
 #### Exercise 2 (Handwriting Recognition)
 In the course you learned how to do classificaiton using Fashion MNIST, a data set containing items of clothing. There's another, similar dataset called MNIST which has items of handwriting -- the digits 0 through 9. Write an **MNIST classifier** that trains to 99% accuracy or above, and does it without a fixed number of epochs -- i.e. you should stop training once you reach that level of accuracy.
 
@@ -108,17 +110,26 @@ def train_mnist():
     # please do not remove # model fitting inline comments.
 
     # YOUR CODE SHOULD START HERE
-
+    '''
+    Define Custom Callback class
+    '''
     # YOUR CODE SHOULD END HERE
 
     mnist = tf.keras.datasets.mnist
     (x_train, y_train),(x_test, y_test) = mnist.load_data(path=path)
     # YOUR CODE SHOULD START HERE
-
+    '''
+    Preprocess image data : Normalize
+    '''
     # YOUR CODE SHOULD END HERE
     model = tf.keras.models.Sequential([
         # YOUR CODE SHOULD START HERE
-    
+        '''
+        1 Flatten layer for image data
+        2 Dense layers 
+          - units of the last layer = # of classes 
+          - activation function of the last layer = tf.nn.softmax
+        '''
         # YOUR CODE SHOULD END HERE
     ])
 
@@ -128,39 +139,41 @@ def train_mnist():
     
     # model fitting
     history = model.fit(# YOUR CODE SHOULD START HERE
-              # YOUR CODE SHOULD END HERE
+                        '''
+                        x, y (training data)
+                        epochs = # of epochs
+                        callback =
+                        '''
+                        # YOUR CODE SHOULD END HERE
     )
     # model fitting
     return history.epoch, history.history['acc'][-1]
 ```
 
 ```py
-# GRADED FUNCTION: train_mnist
 def train_mnist():
 
-    # 사용자 정의 콜백 클래스 
+    # Custom Callback class 
     class myCallback(tf.keras.callbacks.Callback) :
         def on_epoch_end(self, epoch, logs = {}) :
-            if logs.get('accuracy') is not None and logs.get('accuracy') >= 0.99 :
+            if (logs.get('accuracy') is not None and logs.get('accuracy') > 0.99) :
                 print('\nReached 99% accuracy so cancelling training!')
                 self.model.stop_training = True
 
-    # 데이터 셋 로드 
+    # Load Dataset
     mnist = tf.keras.datasets.mnist
     (x_train, y_train),(x_test, y_test) = mnist.load_data(path=path)
 
     # Normalization
     x_train, x_test = x_train / 255.0, x_test / 255.0
-    # callback 변수 생성
+    # Callback 변수 생성
     callbacks = myCallback()
     
     # 3-layers NN
     model = tf.keras.models.Sequential([
-        # YOUR CODE SHOULD START HERE
         tf.keras.layers.Flatten(input_shape=(28,28)),
         tf.keras.layers.Dense(512, activation = tf.nn.relu),
         tf.keras.layers.Dense(10, activation = tf.nn.softmax)
-        # YOUR CODE SHOULD END HERE
     ])
 
     # model compile
@@ -179,13 +192,12 @@ def train_mnist():
 train_mnist()
 
 
-Epoch 1/10
-60000/60000 [==============================] - 9s 145us/sample - loss: 2.8917 - acc: 0.9067
-Epoch 2/10
+Epoch 1/9
+60000/60000 [==============================] - 11s 180us/sample - loss: 0.1988 - acc: 0.9412
 ...
-Epoch 10/10
-60000/60000 [==============================] - 9s 142us/sample - loss: 0.1856 - acc: 0.9638
-([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 0.96383333)
+Epoch 9/9
+60000/60000 [==============================] - 10s 172us/sample - loss: 0.0122 - acc: 0.9961
+([0, 1, 2, 3, 4, 5, 6, 7, 8], 0.99611664)
 ```
 
 </br>
@@ -200,10 +212,69 @@ Epoch 10/10
 - After `max pooling` a 26x26 image with a `2x2 filter`, the output will be `13x13`
 - Applying Convolutions on top of our Deep neural network will make training
 It depends on many factors. It might make your training faster or slower, and a poorly designed Convolutional layer may even be less efficient than a plain DNN!
+</br>
+
+#### Exercise 3 (Fashion MNIST with Convolutions)
+
+
+
+```py
+import tensorflow as tf
+from os import path, getcwd, chdir
+
+# DO NOT CHANGE THE LINE BELOW. If you are developing in a local
+# environment, then grab mnist.npz from the Coursera Jupyter Notebook
+# and place it inside a local folder and edit the path to that location
+path = f"{getcwd()}/../tmp2/mnist.npz"
+
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+sess = tf.Session(config=config)
+
+# GRADED FUNCTION: train_mnist_conv
+def train_mnist_conv():
+    # Please write your code only where you are indicated.
+    # please do not remove model fitting inline comments.
+
+    # YOUR CODE STARTS HERE
+    
+    # YOUR CODE ENDS HERE
+
+    mnist = tf.keras.datasets.mnist
+    (training_images, training_labels), (test_images, test_labels) = mnist.load_data(path=path)
+    # YOUR CODE STARTS HERE
+
+    # YOUR CODE ENDS HERE
+
+    model = tf.keras.models.Sequential([
+            # YOUR CODE STARTS HERE
+
+            # YOUR CODE ENDS HERE
+    ])
+
+    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    # model fitting
+    history = model.fit(
+        # YOUR CODE STARTS HERE
+
+        # YOUR CODE ENDS HERE
+    )
+    # model fitting
+    return history.epoch, history.history['acc'][-1]
+
+_, _ = train_mnist_conv()
+```
+
+```py
+
+
+```
+
+
+
 
 </br>
 </br>
-
 
 
 <a name='1-4'></a>
