@@ -22,11 +22,10 @@ As the guesses get better and better, an accuracy approaches 100 percent, the te
 - `model.fit` trains the neural network to fit one set of values to another.
 
 #### Exercise 1 (Housing Prices)
-  In this exercise you'll try to **build a neural network that predicts the price of a house according to a simple formula.**
-So, imagine if house pricing was as easy as a house costs 50k + 50k per bedroom, so that a 1 bedroom house costs 100k, a 2 bedroom house costs 150k etc.
-How would you create a neural network that learns this relationship so that it would predict a 7 bedroom house as costing close to 400k etc.
-
-  Hint: Your network might work better if you scale the house price down. You don't have to give the answer 400. it might be better to create something that predicts the number 4, and then your answer is in the 'hundreds of thousands' etc.
+- to **build a neural network that predicts the price of a house according to a simple formula.**
+- house pricing was as easy as a house costs 50k + 50k per bedroom, so that a 1 bedroom house costs 100k, a 2 bedroom house costs 150k etc.
+- create a neural network that learns this relationship so that it would predict a 7 bedroom house as costing close to 400k etc.
+  - Hint : Your network might work better if you scale the house price down. You don't have to give the answer 400. it might be better to create something that predicts the number 4, and then your answer is in the 'hundreds of thousands' etc.
 
 ```py
 import tensorflow as tf
@@ -215,9 +214,6 @@ It depends on many factors. It might make your training faster or slower, and a 
 </br>
 
 #### Exercise 3 (Fashion MNIST with Convolutions)
-
-
-
 ```py
 import tensorflow as tf
 from os import path, getcwd, chdir
@@ -266,8 +262,57 @@ _, _ = train_mnist_conv()
 ```
 
 ```py
+def train_mnist_conv():
 
+    # YOUR CODE STARTS HERE  
+    class myCallback(tf.keras.callbacks.Callback):
+        def on_epoch_end(self, epoch, logs = {}):
+            if (logs.get('acc') is not None and logs.get('acc') > 0.998):
+                print('\nReached 99% accuracy so cancelling training!')
+                self.model.stop_training = True    
+    # YOUR CODE ENDS HERE
 
+    mnist = tf.keras.datasets.mnist
+    (training_images, training_labels), (test_images, test_labels) = mnist.load_data(path=path)
+    # YOUR CODE STARTS HERE
+    training_images = training_images.reshape(60000, 28, 28, 1)
+    test_images = test_images.reshape(10000, 28, 28, 1)
+    training_images, test_images = training_images/255., test_images/255.
+    # YOUR CODE ENDS HERE
+
+    model = tf.keras.models.Sequential([
+            # YOUR CODE STARTS HERE
+            tf.keras.layers.Conv2D(64, (3,3), activation = tf.nn.relu, input_shape = (28,28,1)),    
+            tf.keras.layers.MaxPooling2D(2,2),
+            tf.keras.layers.Conv2D(64, (3,3), activation = tf.nn.relu),
+            tf.keras.layers.MaxPooling2D(2,2),
+            tf.keras.layers.Flatten(),
+            tf.keras.layers.Dense(128, activation = tf.nn.relu),
+            tf.keras.layers.Dense(10, activation = tf.nn.softmax)
+            # YOUR CODE ENDS HERE
+    ])
+
+    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    # model fitting
+    history = model.fit(
+        # YOUR CODE STARTS HERE
+        training_images, training_labels, 
+        epochs=15,
+        callbacks = [myCallback()]
+        # YOUR CODE ENDS HERE
+    )
+    # model fitting
+    return history.epoch, history.history['acc'][-1]
+    
+_, _ = train_mnist_conv()
+
+Epoch 1/15
+60000/60000 [==============================] - 14s 240us/sample - loss: 0.1184 - acc: 0.9635
+...
+Epoch 11/15
+59680/60000 [============================>.] - ETA: 0s - loss: 0.0051 - acc: 0.9981
+Reached 99% accuracy so cancelling training!
+60000/60000 [==============================] - 14s 228us/sample - loss: 0.0051 - acc: 0.9981
 ```
 
 
@@ -290,6 +335,54 @@ _, _ = train_mnist_conv()
   - There’s a wide variety of horses.
   - There’s a wide variety of humans.
 - After reducing the size of the images, the training results were different. We removed some convolutions to handle the smaller images
+
+#### Exercise 4 (Handling complex images)
+
+```py
+# GRADED FUNCTION: train_happy_sad_model
+def train_happy_sad_model():
+    # Please write your code only where you are indicated.
+    # please do not remove # model fitting inline comments.
+
+    DESIRED_ACCURACY = 0.999
+
+    class myCallback(# your code):
+         # Your Code
+
+    callbacks = myCallback()
+    
+    # This Code Block should Define and Compile the Model. Please assume the images are 150 X 150 in your implementation.
+    model = tf.keras.models.Sequential([
+        # Your Code Here
+    ])
+
+    from tensorflow.keras.optimizers import RMSprop
+
+    model.compile(# Your Code Here #)
+        
+
+    # This code block should create an instance of an ImageDataGenerator called train_datagen 
+    # And a train_generator by calling train_datagen.flow_from_directory
+
+    from tensorflow.keras.preprocessing.image import ImageDataGenerator
+
+    train_datagen = # Your Code Here
+
+    # Please use a target_size of 150 X 150.
+    train_generator = train_datagen.flow_from_directory(
+        # Your Code Here)
+    # Expected output: 'Found 80 images belonging to 2 classes'
+
+    # This code block should call model.fit_generator and train for
+    # a number of epochs.
+    # model fitting
+    history = model.fit_generator(
+          # Your Code Here)
+    # model fitting
+    return history.history['acc'][-1]
+```
+
+
 
 
 </br>
