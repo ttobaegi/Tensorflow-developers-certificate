@@ -427,7 +427,6 @@ def train_happy_sad_model():
 train_happy_sad_model()
 ```
 ```py
-# GRADED FUNCTION: train_happy_sad_model
 def train_happy_sad_model():
     # Please write your code only where you are indicated.
     # please do not remove # model fitting inline comments.
@@ -459,9 +458,8 @@ def train_happy_sad_model():
     ])
 
     from tensorflow.keras.optimizers import RMSprop
-
     model.compile(# Your Code Here
-                  optimizer = RMSprop(lr=0.0001),
+                  optimizer = RMSprop(learning_rate=0.0001),
                   loss = 'binary_crossentropy',
                   metrics = ['accuracy']
                   )
@@ -471,8 +469,7 @@ def train_happy_sad_model():
     # And a train_generator by calling train_datagen.flow_from_directory
 
     from tensorflow.keras.preprocessing.image import ImageDataGenerator
-
-    train_datagen = ImageDataGenerator(rescale = 1/255.) # Your Code Here
+    train_datagen = ImageDataGenerator(rescale = 1/255.)# Your Code Here
     
 
     # Please use a target_size of 150 X 150.
@@ -488,14 +485,14 @@ def train_happy_sad_model():
     # This code block should call model.fit_generator and train for
     # a number of epochs.
     # model fitting
-    history = model.fit_generator( # Your Code Here
+    history = model.fit_generator(
                                   train_generator,
                                   steps_per_epoch = 8,
-                                  epochs = 25,
+                                  epochs = 15,
                                   verbose = 1,
                                   callbacks = [callbacks]
                                   )
-          
+          # Your Code Here)
     # model fitting
     return history.history['accuracy'][-1]
 
