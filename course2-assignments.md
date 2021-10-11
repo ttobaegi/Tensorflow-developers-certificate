@@ -10,10 +10,11 @@
 
 <a name='2-1'></a>
 ### WEEK 1. Exploring a Larger Dataset
-- `flow_from_directory` on the ImageGenerator
-  - The ability to easily load images for training
-  - The ability to pick the size of training images
-  - The ability to automatically label images based on their directory name
+- ImageGenerator
+  - `flow_from_directory`
+    - The ability to easily load images for training
+    - The ability to pick the size of training images
+    - The ability to automatically label images based on their directory name
 - The size of output image after Convolution/Pooling layers
   - Input Image size : 150x150
     1. Pass a 3x3 Convolution over it : the size of resulting image is 148x148
@@ -21,11 +22,12 @@
 - To view the history of training, create a variable ‘history’ and assign it to the return of model.fit or model.fit_generator
 - `The model.layers API` : to inspect the impact of convolutions on the images.
 - When exploring the graphs, the loss levelled out at about .75 after 2 epochs, but the accuracy climbed close to 1.0 after 15 epochs. What's the significance of this? : There was no point training after 2 epochs, as we overfit to the training data
-- `Validation accuracy` 
-  - a better indicator of model performance with new images than training accuracy.
-  - based on images that the model hasn't been trained with.
 - `Overfitting` 
-  - more likely to occur on smaller datasets. (less likelihood of all possible features being encountered in the training process.)
+    - more likely to occur on smaller datasets. (less likelihood of all possible features being encountered in the training process.)
+  - `Validation accuracy` 
+    - a better indicator of model performance with new images than training accuracy.
+    - based on images that the model hasn't been trained with.
+
 </br>
 
 #### Exercise 1. Cats vs. Dogs 
@@ -143,8 +145,8 @@ history = model.fit_generator(train_generator,
                               epochs=2,
                               verbose=1,
                               validation_data=validation_generator)
-
 ```
+
 ```py
 
 ```
