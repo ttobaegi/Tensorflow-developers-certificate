@@ -191,9 +191,6 @@ history = model.fit_generator(train_generator,
     - dropout parameter of 0.2  : I will lose 20% of the untrained nodes.
     - Symptom of a Dropout rate being set too high : the network would lose specialization to the effect that it would be inefficient or ineffective at learning, driving accuracy down
 
-
-
-
 </br>
 </br>
 
@@ -209,3 +206,6 @@ history = model.fit_generator(train_generator,
 
 </br>
 </br>
+
+
+
