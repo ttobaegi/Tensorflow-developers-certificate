@@ -58,6 +58,7 @@ predictions = model.predict(data)
 <a name="data"></a>
 
 ## TensorFlow Data 
+
 **TensorFlow Datasets** 
 - a collection of datasets ready to use, with TensorFlow or other Python ML frameworks enabling easy-to-use and high-performance input pipelines.
   - [`tf.data.Datasets`](https://www.tensorflow.org/api_docs/python/tf/data/Dataset)
@@ -81,3 +82,46 @@ num_classes = 10
 
 </br>
 </br>
+
+<a name="preprocessing"></a>
+
+## Preprocessing
+### Sequence Padding
+#### Tokenizer, Text-to-sequence & Padding
+
+```py
+## Import modules
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+## Dataset
+sentences = [
+    'I love my dog',
+    'I love my cat',
+    'You love my dog!',
+    'Do you think my dog is amazing?'
+]
+
+
+## Tokenizer
+tokenizer = Tokenizer(num_words = 100, oov_token="<OOV>")
+# Key value pair (word: token)
+tokenizer.fit_on_texts(sentences)
+word_index = tokenizer.word_index
+
+## Text-to-sequence
+# Lists of tokenized sentences
+sequences = tokenizer.texts_to_sequences(sentences)
+
+## Padding
+# Padded tokenized sentences
+padded = pad_sequences(sequences, maxlen=5)
+
+print("\nWord Index = " , word_index)
+print("\nSequences = " , sequences)
+print("\nPadded Sequences:")
+print(padded)
+
+```
