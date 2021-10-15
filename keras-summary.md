@@ -125,3 +125,119 @@ print("\nPadded Sequences:")
 print(padded)
 
 ```
+
+
+### Other
+```py
+from urllib.request import urlopen
+from numpy as np
+
+data = np.loadtxt(urlopen('url...'), 
+                  delimiter = ",")
+# numpy slicing
+X = data[:,0:9]
+```
+</br>
+</br>
+
+
+<a name="preprocessing"></a>
+
+## Preprocessing
+### Sequence Padding
+#### Tokenizer, Text-to-sequence & Padding
+
+```py
+## Import modules
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+## Dataset
+sentences = [
+    'I love my dog',
+    'I love my cat',
+    'You love my dog!',
+    'Do you think my dog is amazing?'
+]
+
+## Tokenizer
+tokenizer = Tokenizer(num_words = 100, oov_token="<OOV>")
+# Key value pair (word: token)
+tokenizer.fit_on_texts(sentences)
+word_index = tokenizer.word_index
+
+## Text-to-sequence
+# Lists of tokenized sentences
+sequences = tokenizer.texts_to_sequences(sentences)
+
+## Padding
+# Padded tokenized sentences
+padded = pad_sequences(sequences, maxlen=5)
+
+print("\nWord Index = " , word_index)
+print("\nSequences = " , sequences)
+print("\nPadded Sequences:")
+print(padded)
+
+```
+
+### One-hot Encoding
+
+```python
+from keras.utils import to_categorical
+
+```
+
+
+### ImageDataGenerator
+
+```python
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+
+# Image augmentation
+train_datagen = ImageDataGenerator(
+      rescale=1./255,
+      rotation_range=40,
+      width_shift_range=0.2,
+      height_shift_range=0.2,
+      shear_range=0.2,
+      zoom_range=0.2,
+      horizontal_flip=True,
+      fill_mode='nearest')
+validation_datagen = ImageDataGenerator(rescale=1/255)
+
+# Flow training images in batches of 128 using train_datagen generator
+train_generator = train_datagen.flow_from_directory(
+        '/tmp/horse-or-human/',  # This is the source directory for training images
+        target_size=(300, 300),  # All images will be resized to 300x300
+        batch_size=128,
+        # Since we use binary_crossentropy loss, we need binary labels
+        class_mode='binary')
+
+# Flow training images in batches of 128 using train_datagen generator
+validation_generator = validation_datagen.flow_from_directory(
+        '/tmp/validation-horse-or-human/',  # This is the source directory for training images
+        target_size=(300, 300),  # All images will be resized to 300x300
+        batch_size=32,
+        # Since we use binary_crossentropy loss, we need binary labels
+        class_mode='binary')
+```
+
+### Train and Test set split
+```py
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, 
+                                                    test_size = 0.33, 
+                                                    random_state=42)
+```
+
+### Standardization/Normalization
+```py
+from sklearn.preprocessing import StandardScaler
+
+# 표준화 
+scaler = StandardScaler()
+
+```
