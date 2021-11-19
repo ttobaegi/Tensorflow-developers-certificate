@@ -1,7 +1,5 @@
 텐서플로우 개발자 자격증 준비 코세라 강의 코드 정리 (1) Introduction to TensorFlow
 
-출처: https://geniewishescometrue.tistory.com/entry/Certificate-텐서플로우-자격증-정리-Introduction-to-TensorFlow-1?category=510887 [Findingflow]
-
 
 ## COURSE 2 - Convolutional Neural Networks in TensorFlow
 >### Table of Contents   
